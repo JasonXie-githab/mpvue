@@ -3,6 +3,7 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../configH5')
 const vueLoaderConfig = require('./vue-loader.conf')
+process.env.PLATFORM = 'h5';
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -31,10 +32,11 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json', '.html'],
+    extensions: ['.js', '.vue', '.json', '.ts', '.scss'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src')
+      '@': resolve('src'),
+      '_modules': resolve('node_modules'),
     }
   },
   module: {
@@ -48,19 +50,23 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
+        include: [resolve('src'), resolve('test'), resolve('webpack-dev-server/client')]
       },
       {
         test: /\.css$/,
         use: [
           'vue-style-loader',
-          'css-loader'
+          'css-loader',
+          'postcss-loader'
         ],
       },
       {
-            test: /\.less$/,
-
-            loader: "style-loader!css-loader!less-loader",
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

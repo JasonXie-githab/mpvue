@@ -1,2 +1,6 @@
+dist/*.js
+distH5/*.js
 build/*.js
+buildH5/*.js
 config/*.js
+configH5/*.js

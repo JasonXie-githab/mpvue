@@ -1,50 +1,51 @@
+/*
+ * @Author: Jason
+ * @Date: 2019-06-16 19:59:26
+ * @Last Modified by:   Jason
+ * @Last Modified time: 2019-06-16 19:59:26
+ */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import Vuex from 'vuex'
-import App from './AppH5'
-import router from './router'
-import wxService from './api/wxService'
-import httpService from './api/httpService'
-import store from './store'
+import Vue from 'vue';
+import App from './AppH5';
+import router from './router';
+import store from './store';
+import './utils/flexible';
+import Ui from './components/common/ui';
+import './api/common_api';
 
-Vue.config.productionTip = false
-Vue.use(Vuex)
 Vue.mixin({
-  data () {
+  components: {
+    Ui,
+  },
+  data() {
     return {
-      service: '', // 服务
-      router: '/', // 路由路径
-      imgSrc: '' // 图片路径
-    }
+      test: 456,
+    };
   },
   methods: {
-      newroot () {
-          return  this.$route
-      },
-      navigatePageTo (url) {
-          this.$router.push(url)
-      },
-      reLaunchPageTo (url) {
-          this.$router.replace(url)
-      },
-      setStorageSync (name, data) {
-          sessionStorage.setItem(name, JSON.stringify(data))
-      },
-      getStorageSync (name) {
-          return JSON.parse(sessionStorage.getItem(name))
-      }
+    navigateTo(url) {
+      this.$router.push(url);
+    },
+    navigateBack(delta) {
+      this.$router.back(-delta || -1);
+    },
+    redirectTo(url) {
+      this.$router.redirect(url);
+    },
+    reLaunch(url) {
+      this.$router.replace(url);
+    },
+    switchTab(url) {
+      this.$router.push(url);
+    },
   },
-  created () {
-      console.log('chrome')
-      this.service = httpService
-  }
-})
-/* eslint-disable no-new */
+});
+/* eslint-disable */
 new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>',
-  store
-})
+  store,
+});

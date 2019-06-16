@@ -5,6 +5,7 @@ var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var MpvuePlugin = require('webpack-mpvue-asset-plugin')
 var glob = require('glob')
+process.env.PLATFORM = 'wx';
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -38,10 +39,11 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.ts', '.scss'],
     alias: {
       'vue': 'mpvue',
-      '@': resolve('src')
+      '@': resolve('src'),
+      '_modules': resolve('node_modules'),
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],

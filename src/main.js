@@ -1,46 +1,74 @@
-import Vue from 'vue'
-import App from './App'
-import store from './store'
-import wxService from './api/wxService'
-import httpService from './api/httpService'
+/*
+ * @Author: Jason
+ * @Date: 2019-06-16 19:59:22
+ * @Last Modified by:   Jason
+ * @Last Modified time: 2019-06-16 19:59:22
+ */
+import Vue from 'vue';
+import App from './App';
+import store from './store';
+import Ui from './components/common/ui';
+import './api/common_api';
 
-Vue.config.productionTip = false
-App.mpType = 'app'
-Vue.prototype.$store = store
+App.mpType = 'app';
+Vue.prototype.$store = store;
+const app = new Vue(App);
+app.$mount();
+
+Vue.component('Ui', Ui);
 
 Vue.mixin({
   data() {
     return {
-      service: '',
-      router: '/',
-      imgSrc: '/'
-    }
+      test: 123,
+    };
   },
   methods: {
-      newroot () { //
-          return this.$root.$mp
-      },
-      navigatePageTo (url) {
-          wx.navigateTo({url: url})
-      },
-      reLaunchPageTo (url) {
-          wx.reLaunch({url: url})
-      },
-      setStorageSync (name, data) {
-          wx.setStorageSync(name, data)
-      },
-      getStorageSync (name) {
-          return wx.getStorageSync(name)
+    navigateTo(url) {
+      /* eslint-disable */
+      const pages = getCurrentPages();
+      /* eslint-enable */
+      if (pages.length >= 10) {
+        Vue.prototype.$confirm({
+          title: '提示',
+          content: '您当前打开的页面过多，继续打开页面会关闭当前页面，是否继续？',
+          success: (res) => {
+            if (res.confirmed) {
+              wx.redirectTo({
+                url: `pages/${url}/main`,
+              });
+            }
+          },
+        });
+      } else {
+        wx.navigateTo({
+          url: `pages/${url}/main`,
+        });
       }
+    },
+    navigateBack(delta) {
+      wx.navigateBack({
+        delta: delta || 1,
+      });
+    },
+    redirectTo(url) {
+      wx.redirectTo({
+        url: `/pages/${url}/main`,
+      });
+    },
+    reLaunch(url) {
+      wx.reLaunch({
+        url: `/pages/${url}/main`,
+      });
+    },
+    switchTab(url) {
+      wx.switchTab({
+        url: `/pages/${url}/main`,
+      });
+    },
   },
-  created() {
-      // console.log('wx')
-      this.service = wxService
-  }
-})
+});
 
-const app = new Vue(App)
-app.$mount()
 
 export default {
   // 这个字段走 app.json
@@ -51,7 +79,7 @@ export default {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'mpvue demo',
-      navigationBarTextStyle: 'black'
-    }
-  }
-}
+      navigationBarTextStyle: 'black',
+    },
+  },
+};

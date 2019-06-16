@@ -1,0 +1,63 @@
+/*
+ * @Author: Jason 
+ * @Date: 2019-06-15 21:45:58 
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-16 11:04:31
+ */
+html, body {
+    width: 100vw;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+body{
+    -webkit-overflow-scrolling: touch;
+}
+div{
+    font-size: 28px;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+}
+scroll-view {
+    ::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        color: transparent;
+    }
+}
+button::after {
+  border: none;
+}
+button {
+    background-color: transparent;
+}
+img {
+    display: block;
+    border: 0;
+}
+input {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+input::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
+    color: #999;
+}
+input, button, textarea{
+    outline:none;
+    box-sizing: border-box;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+span, em, i {
+    font-style: normal;
+}
