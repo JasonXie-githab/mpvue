@@ -1634,8 +1634,8 @@ if (false) {
 /*
  * @Author: Jason
  * @Date: 2019-06-16 19:57:54
- * @Last Modified by:   Jason
- * @Last Modified time: 2019-06-16 19:57:54
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-16 20:21:36
  */
 
 
@@ -1710,9 +1710,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$confirm = function (_ref)
 
   __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$App.$emit('confirm', {
     // 标题
-    title: title,
+    title: String(title),
     // 内容
-    content: content,
+    content: String(content),
     // 确认按钮文字
     confirmButtonText: confirmButtonText,
     // 取消按钮文字
@@ -1750,7 +1750,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$prompt = function (_ref2)
 
   __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$App.$emit('prompt', {
     // 标题
-    title: title,
+    title: String(title),
     // input value
     content: content,
     // 确认按钮文字

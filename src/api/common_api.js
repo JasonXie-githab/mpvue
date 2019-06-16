@@ -1,8 +1,8 @@
 /*
  * @Author: Jason
  * @Date: 2019-06-16 19:57:54
- * @Last Modified by:   Jason
- * @Last Modified time: 2019-06-16 19:57:54
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-16 20:21:36
  */
 import Vue from 'vue';
 
@@ -58,9 +58,9 @@ Vue.prototype.$confirm = ({
 }) => {
   Vue.prototype.$App.$emit('confirm', {
     // 标题
-    title,
+    title: String(title),
     // 内容
-    content,
+    content: String(content),
     // 确认按钮文字
     confirmButtonText,
     // 取消按钮文字
@@ -85,7 +85,7 @@ Vue.prototype.$prompt = ({
 }) => {
   Vue.prototype.$App.$emit('prompt', {
     // 标题
-    title,
+    title: String(title),
     // input value
     content,
     // 确认按钮文字
