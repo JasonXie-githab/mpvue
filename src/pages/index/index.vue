@@ -1,12 +1,12 @@
 /*
  * @Author: Jason 
  * @Date: 2019-06-16 19:58:30 
- * @Last Modified by:   Jason 
- * @Last Modified time: 2019-06-16 19:58:30 
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-17 20:39:05
  */
 <template>
   <div class="container">
-    <div class="button" @click="confirm">confiem</div>
+    <div class="button" @click="confirm">confirm</div>
     <div class="button" @click="prompt">prompt</div>
     <div class="button" @click="showLoading">showLoading</div>
     <div class="button" @click="hideLoading">hideLoading</div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {

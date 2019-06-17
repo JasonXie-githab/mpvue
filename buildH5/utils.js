@@ -24,7 +24,10 @@ exports.cssLoaders = function (options) {
   const postcssLoader = {
     loader: 'postcss-loader',
     options: {
-      sourceMap: true
+      sourceMap: true,
+      config: {
+        path: path.resolve(__dirname, './'),
+      }
     }
   }
 
@@ -55,6 +58,7 @@ exports.cssLoaders = function (options) {
   function scssResourceLoader() {
     var loaders = [
       cssLoader,
+      postcssLoader,
       'sass-loader',
       {
         loader: 'sass-resources-loader',

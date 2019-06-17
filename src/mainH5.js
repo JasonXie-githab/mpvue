@@ -1,8 +1,8 @@
 /*
  * @Author: Jason
  * @Date: 2019-06-16 19:59:26
- * @Last Modified by:   Jason
- * @Last Modified time: 2019-06-16 19:59:26
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-17 20:33:39
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -19,9 +19,7 @@ Vue.mixin({
     Ui,
   },
   data() {
-    return {
-      test: 456,
-    };
+    return {};
   },
   methods: {
     navigateTo(url) {

@@ -1,32 +1,15 @@
-/*
- * @Author: Jason 
- * @Date: 2019-06-15 21:45:54 
- * @Last Modified by: Jason
- * @Last Modified time: 2019-06-16 10:26:12
- */
-/*
- * @Author: Jason 
- * @Date: 2019-06-15 21:45:50 
- * @Last Modified by: Jason
- * @Last Modified time: 2019-06-15 21:47:12
- */
-/*
- * @Author: Jason 
- * @Date: 2019-06-15 21:45:58 
- * @Last Modified by: Jason
- * @Last Modified time: 2019-06-16 11:04:31
- */
-html.data-v-6b277275, body.data-v-6b277275 {
+
+page.data-v-6b277275, page.data-v-6b277275 {
   width: 100vw;
   overflow: hidden;
   padding: 0;
   margin: 0;
 }
-body.data-v-6b277275 {
+page.data-v-6b277275 {
   -webkit-overflow-scrolling: touch;
 }
-div.data-v-6b277275 {
-  font-size: 0.74667rem;
+._div.data-v-6b277275 {
+  font-size: 28rpx;
 }
 .data-v-6b277275::-webkit-scrollbar {
   width: 0;
@@ -38,47 +21,47 @@ scroll-view.data-v-6b277275 ::-webkit-scrollbar {
   height: 0;
   color: transparent;
 }
-button.data-v-6b277275::after {
+._button.data-v-6b277275::after {
   border: none;
 }
-button.data-v-6b277275 {
+._button.data-v-6b277275 {
   background-color: transparent;
 }
-img.data-v-6b277275 {
+._img.data-v-6b277275 {
   display: block;
   border: 0;
 }
-input.data-v-6b277275 {
+._input.data-v-6b277275 {
   padding-top: 0;
   padding-bottom: 0;
 }
-input.data-v-6b277275::-moz-focus-inner {
+._input.data-v-6b277275::-moz-focus-inner {
   border: 0;
   padding: 0;
 }
-input.data-v-6b277275::-webkit-input-placeholder, textarea.data-v-6b277275::-webkit-input-placeholder {
+._input.data-v-6b277275::-webkit-input-placeholder, ._textarea.data-v-6b277275::-webkit-input-placeholder {
   color: #999;
 }
-input.data-v-6b277275, button.data-v-6b277275, textarea.data-v-6b277275 {
+._input.data-v-6b277275, ._button.data-v-6b277275, ._textarea.data-v-6b277275 {
   outline: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-input.data-v-6b277275:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 26.66667rem white inset;
+._input.data-v-6b277275:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000rpx white inset;
 }
-span.data-v-6b277275, em.data-v-6b277275, i.data-v-6b277275 {
+._span.data-v-6b277275, ._em.data-v-6b277275, ._i.data-v-6b277275 {
   font-style: normal;
 }
 .container.data-v-6b277275 {
-  padding: 0.8rem;
+  padding: 30rpx;
 }
 .button.data-v-6b277275 {
   width: 100%;
-  height: 2.66667rem;
+  height: 100rpx;
   background: #f2f2f2;
   text-align: center;
-  border-radius: 0.26667rem;
-  line-height: 2.66667rem;
-  margin-bottom: 0.53333rem;
+  border-radius: 10rpx;
+  line-height: 100rpx;
+  margin-bottom: 20rpx;
 }

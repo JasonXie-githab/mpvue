@@ -68,8 +68,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /*
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
- * @Last Modified by:   Jason
- * @Last Modified time: 2019-06-16 19:59:22
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-17 20:33:20
  */
 
 
@@ -86,9 +86,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Ui', __WEBPACK_IMPORTED_M
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.mixin({
   data: function data() {
-    return {
-      test: 123
-    };
+    return {};
   },
 
   methods: {
@@ -222,7 +220,6 @@ if (false) {(function () {
 //
 //
 //
-//
 
 /***/ }),
 /* 9 */
@@ -234,11 +231,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "app"
     }
-  }, [_c('ui', {
-    attrs: {
-      "mpcomid": '0'
-    }
-  })], 1)
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -258,20 +251,26 @@ if (false) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__modules_vuex__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ui__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ui__);
 /*
  * @Author: Kaiser
  * @Date: 2019-06-10 09:51:38
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-13 17:58:19
+ * @Last Modified time: 2019-06-17 20:36:56
  */
 
 
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1__modules_vuex__["a" /* default */]);
 
-var store = new __WEBPACK_IMPORTED_MODULE_1__modules_vuex__["a" /* default */].Store({
-  modules: {}
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
+
+var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
+  modules: {
+    Ui: __WEBPACK_IMPORTED_MODULE_2__ui___default.a
+  }
 });
 /* harmony default export */ __webpack_exports__["a"] = (store);
 
@@ -1773,6 +1772,150 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$prompt = function (_ref2)
 // 关闭输入确认框
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$closePrompt = function () {
   __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.$App.$emit('closePrompt');
+};
+
+/***/ }),
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */,
+/* 63 */,
+/* 64 */,
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
+/* 74 */,
+/* 75 */,
+/* 76 */,
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */,
+/* 93 */,
+/* 94 */,
+/* 95 */
+/***/ (function(module, exports) {
+
+/*
+ * @Author: Jason
+ * @Date: 2019-06-17 20:38:40
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-17 21:18:20
+ * ui弹框等组件控制数据
+ */
+/* eslint-disable no-param-reassign */
+module.exports = {
+  state: {
+    // 蒙版控制
+    mask: false,
+    // message 列表
+    messageList: [],
+    // loading控制
+    loading: {
+      // 显示
+      show: false,
+      // 文字
+      text: '加载中'
+    },
+    // 成功弹框控制
+    success: {
+      // 显示
+      show: false,
+      // 文字
+      text: '成功',
+      // 关闭延迟时间ms
+      duration: 2000
+    },
+    // 确认框控制
+    confirm: {
+      // 显示
+      show: false,
+      // 标题
+      title: '',
+      // 内容
+      content: '',
+      // 确定按钮文字
+      confirmButtonText: '确定',
+      // 取消按钮文字
+      cancelButtonText: '取消',
+      // 是否显示取消按钮
+      showCancelButton: true,
+      // 确认后回调
+      success: '',
+      // 取消后回调
+      fail: ''
+    },
+    // 输入对话框控制
+    prompt: {
+      // 显示
+      show: false,
+      // 标题
+      title: '',
+      // 内容
+      content: '',
+      // 确定按钮文字
+      confirmButtonText: '确定',
+      // 取消按钮文字
+      cancelButtonText: '取消',
+      // 是否显示取消按钮
+      showCancelButton: true,
+      // 正则
+      inputPattern: /\S/,
+      // 校验失败提示文字
+      inputErrorMessage: '格式不正确',
+      // 确认后回调
+      success: '',
+      // 取消后回调
+      fail: ''
+    }
+  },
+  mutations: {
+    setTest: function setTest(state, test) {
+      state.test = test;
+    }
+  },
+  getters: {
+    getTest: function getTest(state) {
+      return state.test;
+    }
+  }
 };
 
 /***/ })

@@ -43,7 +43,6 @@ module.exports = {
     alias: {
       'vue': 'mpvue',
       '@': resolve('src'),
-      '_modules': resolve('node_modules'),
     },
     symlinks: false,
     aliasFields: ['mpvue', 'weapp', 'browser'],
@@ -77,6 +76,22 @@ module.exports = {
             }
           },
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'postcss-loader'
+        ],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

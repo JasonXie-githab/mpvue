@@ -100,6 +100,7 @@ if (false) {(function () {
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
     return {
@@ -175,7 +176,7 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     on: {
       "click": _vm.confirm
     }
-  }, [_vm._v("confiem")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("confirm")]), _vm._v(" "), _c('div', {
     staticClass: "button",
     attrs: {
       "eventid": '1'

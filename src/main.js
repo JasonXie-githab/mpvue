@@ -1,11 +1,11 @@
 /*
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
- * @Last Modified by:   Jason
- * @Last Modified time: 2019-06-16 19:59:22
+ * @Last Modified by: Jason
+ * @Last Modified time: 2019-06-17 20:33:20
  */
 import Vue from 'vue';
-import App from './App';
+import App from '@/App';
 import store from './store';
 import Ui from './components/common/ui';
 import './api/common_api';
@@ -19,9 +19,7 @@ Vue.component('Ui', Ui);
 
 Vue.mixin({
   data() {
-    return {
-      test: 123,
-    };
+    return {};
   },
   methods: {
     navigateTo(url) {

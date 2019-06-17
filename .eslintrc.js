@@ -35,12 +35,12 @@ module.exports = {
     settings: {
       'import/resolver': {
         webpack: {
-          config: './buildH5/webpack.baseH5.conf.js',
+          config: process.env.PLATFORM === 'wx'? './build/webpack.base.conf.js' :'./buildH5/webpack.baseH5.conf.js',
         },
         // https://www.npmjs.com/package/eslint-import-resolver-alias
         // eslint只识别部分alias的解决方案
         alias: {
-          map: [['_modules', './node_modules']],
+          map: [['_modules', './node_modules'],['@', './src']],
           extensions: ['.ts', '.js', '.json', '.vue', '.d.ts'],
         },
       },
