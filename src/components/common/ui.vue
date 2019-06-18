@@ -1,16 +1,17 @@
 <template>
     <div class="ms_ui">
-        <ms-mask v-for="(item, index) in maskList" :key="index" :closeOnClickMask="item.closeOnClickMask" @closeMask="closeMask(index)"/>
-        <div class="message_box" v-if="messageList.length > 0">
-            <ms-message v-for="(item, index) in messageList" :message="item.message" :duration="item.duration" :key="index" @closeMessage="closeMessage(index)"/>
+        <ms-mask v-if="getMask.show" :closeOnClickMask="getMask.closeOnClickMask" @closeMask="closeMask"/>
+        <div class="message_list" v-if="getMessageList.length > 0">
+            <ms-message v-for="(item, index) in getMessageList" :message="item.text" :key="index"/>
         </div>
-        <ms-confirm v-for="(item, index) in confirmList" :key="index" :index="index" :title="item.title" :content="item.content" :confirmButtonText="item.confirmButtonText" :cancelButtonText="item.cancelButtonText" :showCancelButton="item.showCancelButton" @callback="confirmCallback"/>
-        <ms-prompt v-for="(item, index) in promptList" :key="index" :index="index" :title="item.title" :content="item.content" :showCancelButton="item.showCancelButton" :inputPattern="item.inputPattern" :inputErrorMessage="item.inputErrorMessage" @callback="promptCallback"/>
-        <ms-loading v-if="showLoading" :loadingText="loadingText"/>
-        <ms-success v-if="showSuccess" :successText="successText" :duration="successDuration" @closeSuccess="closeSuccess"/>
+        <ms-confirm v-if="getConfirm.show" :title="getConfirm.title" :content="getConfirm.content" :confirmButtonText="getConfirm.confirmButtonText" :cancelButtonText="getConfirm.cancelButtonText" :showCancelButton="getConfirm.showCancelButton" @callback="confirmCallback"/>
+        <ms-prompt v-if="getPrompt.show" :title="getPrompt.title" :content="getPrompt.content" :showCancelButton="getPrompt.showCancelButton" :inputPattern="getPrompt.inputPattern" :inputErrorMessage="getPrompt.inputErrorMessage" @callback="promptCallback"/>
+        <ms-loading v-if="getLoading.show" :loadingText="getLoading.text"/>
+        <ms-success v-if="getSuccess.show" :successText="getSuccess.text" :duration="getSuccess.duration" @closeSuccess="closeSuccess"/>
     </div>
 </template>s
 <script>
+import { mapGetters } from 'vuex';
 import MsMask from './mask';
 import MsMessage from './message_box/message';
 import MsConfirm from './message_box/confirm';
@@ -20,18 +21,15 @@ import MsSuccess from './message_box/success';
 
 export default {
   name: 'Ui',
-  data() {
-    return {
-      maskList: [],
-      messageList: [],
-      confirmList: [],
-      promptList: [],
-      showLoading: false,
-      loadingText: '加载中',
-      showSuccess: false,
-      successText: '成功',
-      successDuration: 2000,
-    };
+  computed: {
+    ...mapGetters([
+      'getMask',
+      'getMessageList',
+      'getLoading',
+      'getSuccess',
+      'getConfirm',
+      'getPrompt',
+    ]),
   },
   components: {
     MsMask,
@@ -41,151 +39,48 @@ export default {
     MsLoading,
     MsSuccess,
   },
-  onShow() {
-    this.ready();
-  },
-  created() {
-    this.ready();
-  },
   onUnload() {
-    this.closeAll();
+    this.clear();
   },
   beforeDestroy() {
-    this.closeAll();
+    this.clear();
   },
   onHide() {
-    this.closeAll();
+    this.clear();
   },
   methods: {
-    closeAll() {
-      this.$closeConfirm();
-      this.$closeMask();
-      this.$hideLoading();
+    clear() {
+      this.$store.commit('clearUiData');
     },
-    ready() {
-      this.$App.$off('openMask');
-      this.$App.$off('closeMask');
-      this.$App.$off('message');
-      this.$App.$off('confirm');
-      this.$App.$off('prompt');
-      this.$App.$off('closeConfirm');
-      this.$App.$off('closePrompt');
-      this.$App.$off('showLoading');
-      this.$App.$off('hideLoading');
-      this.$App.$off('showSuccess');
-      this.$App.$on('openMask', ({ closeOnClickMask, beforeClose }) => {
-        this.openMask({ closeOnClickMask, beforeClose });
-      });
-      this.$App.$on('closeMask', () => {
-        this.closeMask();
-      });
-      this.$App.$on('message', ({ message, duration }) => {
-        if (message) {
-          for (let i = 0; i < this.messageList.length; i += 1) {
-            if (this.messageList[i].message === message) {
-              this.messageList.splice(i, 1);
-              break;
-            }
-          }
-          this.messageList.push({ message, duration: duration || 2000 });
-        }
-      });
-      this.$App.$on('confirm', ({
-        title,
-        content,
-        showCancelButton,
-        confirmButtonText,
-        cancelButtonText,
-        success,
-        fail,
-      }) => {
-        this.confirmList.push({
-          title: title || '', content: content || '', confirmButtonText: confirmButtonText || '确定', cancelButtonText: cancelButtonText || '取消', showCancelButton: !!showCancelButton, success, fail,
-        });
-      });
-      this.$App.$on('prompt', ({
-        title,
-        content,
-        showCancelButton,
-        confirmButtonText,
-        cancelButtonText,
-        inputPattern,
-        inputErrorMessage,
-        success,
-        fail,
-      }) => {
-        this.promptList.push({
-          title: title || '', content: content || '', confirmButtonText: confirmButtonText || '确定', cancelButtonText: cancelButtonText || '取消', showCancelButton: !!showCancelButton, inputPattern, inputErrorMessage, success, fail,
-        });
-      });
-      this.$App.$on('closeConfirm', () => {
-        this.confirmList = [];
-      });
-      this.$App.$on('closePrompt', () => {
-        this.promptList = [];
-      });
-      this.$App.$on('showLoading', ({ title }) => {
-        this.showLoading = true;
-        if (title) this.loadingText = title;
-      });
-      this.$App.$on('hideLoading', () => {
-        this.showLoading = false;
-        this.title = '加载中';
-      });
-      this.$App.$on('showSuccess', ({ message, duration }) => {
-        this.showSuccess = true;
-        if (message) this.successText = message;
-        this.successDuration = duration || 2000;
-      });
-    },
-    closeMask(index) {
-      if (index >= 0) {
-        if (this.maskList[index].beforeClose) {
-          this.maskList[index].beforeClose();
-        }
-        this.maskList.splice(index, 1);
-      } else {
-        this.maskList = [];
+    closeMask() {
+      if (this.getMask.beforeClose) {
+        this.getMask.beforeClose();
       }
+      this.$closeMask();
     },
     openMask({ closeOnClickMask, beforeClose }) {
       this.maskList.push({ closeOnClickMask: !!closeOnClickMask, beforeClose });
     },
-    closeMessage(index) {
-      if (index >= 0) {
-        this.messageList[index].closed = true;
-        for (let i = 0; i < this.messageList.length; i += 1) {
-          if (!this.messageList[i].closed) {
-            return;
-          }
-        }
-        this.messageList = [];
-      } else {
-        this.messageList = [];
-      }
-    },
     closeSuccess() {
-      this.showSuccess = false;
-      this.successText = '成功';
-      this.successDuration = 2000;
+      this.$closeSuccess();
     },
-    confirmCallback(flag, index) {
-      if (flag && this.confirmList[index].success) {
-        this.confirmList[index].success({ confirmed: flag });
+    confirmCallback(flag) {
+      if (flag && this.getConfirm.success) {
+        this.getConfirm.success({ confirmed: flag });
       }
-      if (!flag && this.confirmList[index].fail) {
-        this.confirmList[index].fail({ confirmed: flag });
+      if (!flag && this.getConfirm.fail) {
+        this.getConfirm.fail({ confirmed: flag });
       }
-      this.$App.$emit('closeConfirm');
+      this.$closeConfirm();
     },
-    promptCallback(flag, index, value) {
-      if (flag && this.promptList[index].success) {
-        this.promptList[index].success({ confirmed: flag, value });
+    promptCallback(flag, value) {
+      if (flag && this.getPrompt.success) {
+        this.getPrompt.success({ confirmed: flag, value });
       }
-      if (!flag && this.promptList[index].fail) {
-        this.promptList[index].fail({ confirmed: flag, value });
+      if (!flag && this.getPrompt.fail) {
+        this.getPrompt.fail({ confirmed: flag, value });
       }
-      this.$App.$emit('closePrompt');
+      this.$closePrompt();
     },
   },
 };
@@ -193,7 +88,7 @@ export default {
 
 <style lang="scss" scoped>
 .ms_ui{
-    .message_box{
+    .message_list{
         position: fixed;
         top: 20vh;
         left: 0;

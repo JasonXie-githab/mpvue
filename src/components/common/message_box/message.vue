@@ -1,6 +1,6 @@
 <template>
     <div class="message_box">
-        <div class="ms_message" :style="{opacity: opacity}">
+        <div class="ms_message">
             <span class="text">{{message}}</span>
         </div>
     </div>
@@ -10,29 +10,10 @@
 export default {
   name: 'MsMessage',
   props: {
-    duration: {
-      type: Number,
-      default: () => 2000,
-    },
     message: {
       type: String,
       default: () => '',
     },
-  },
-  data() {
-    return {
-      opacity: 1,
-    };
-  },
-  mounted() {
-    const param1 = setTimeout(() => {
-      this.opacity = 0;
-      const param2 = setTimeout(() => {
-        this.$emit('closeMessage');
-        clearTimeout(param2);
-      }, 200);
-      clearTimeout(param1);
-    }, this.duration);
   },
 };
 </script>
@@ -51,7 +32,7 @@ export default {
         white-space: normal;
         word-break:break-all;
         transition: 200ms linear;
-        opacity: 0;
+        opacity: 1;
         text-overflow: ellipsis;
         max-height: 60vh;
         .text{

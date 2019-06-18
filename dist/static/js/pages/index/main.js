@@ -1,13 +1,13 @@
 global.webpackJsonp([2],{
 
-/***/ 40:
+/***/ 85:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(86);
 
 
 
@@ -16,16 +16,16 @@ app.$mount();
 
 /***/ }),
 
-/***/ 41:
+/***/ 86:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(43);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6b277275_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6b277275_hasScoped_true_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(89);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(42)
+  __webpack_require__(87)
 }
 var normalizeComponent = __webpack_require__(0)
 /* script */
@@ -70,14 +70,14 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 42:
+/***/ 87:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 43:
+/***/ 88:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -99,7 +99,13 @@ if (false) {(function () {
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   data: function data() {
@@ -114,7 +120,7 @@ if (false) {(function () {
 
       this.$confirm({
         title: '提示',
-        content: this.test,
+        content: '123',
         success: function success() {
           _this.$message('success');
         },
@@ -129,6 +135,8 @@ if (false) {(function () {
       this.$prompt({
         title: '请输入手机号',
         content: '123',
+        inputPattern: /^[1][3,4,5,7,8][0-9]{9}$/,
+        inputErrorMessage: '手机号不正确',
         success: function success(res) {
           _this2.$message(res.value);
         },
@@ -153,15 +161,33 @@ if (false) {(function () {
         }
       });
     },
-    showSuccess: function showSuccess() {
-      this.$showSuccess();
+    success: function success() {
+      this.$success();
+    },
+    toHome: function toHome() {
+      this.$go('home', { id: 1 });
+    },
+    redirect: function redirect() {
+      this.$redirect('home');
+    },
+    reLaunch: function reLaunch() {
+      this.$reLaunch('home');
+    },
+    setStorage: function setStorage() {
+      this.$setStorage('test', 'testStorage');
+    },
+    getStorage: function getStorage() {
+      this.$message(this.$getStorage('test'));
+    },
+    removeStorage: function removeStorage() {
+      this.$removeStorage('test');
     }
   }
 });
 
 /***/ }),
 
-/***/ 44:
+/***/ 89:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -214,9 +240,57 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "eventid": '5'
     },
     on: {
-      "click": _vm.showSuccess
+      "click": _vm.success
     }
-  }, [_vm._v("showSuccess")]), _vm._v(" "), _c('ui', {
+  }, [_vm._v("success")]), _vm._v(" "), _c('div', {
+    staticClass: "button",
+    attrs: {
+      "eventid": '6'
+    },
+    on: {
+      "click": _vm.toHome
+    }
+  }, [_vm._v("go to home")]), _vm._v(" "), _c('div', {
+    staticClass: "button",
+    attrs: {
+      "eventid": '7'
+    },
+    on: {
+      "click": _vm.redirect
+    }
+  }, [_vm._v("redirect to home")]), _vm._v(" "), _c('div', {
+    staticClass: "button",
+    attrs: {
+      "eventid": '8'
+    },
+    on: {
+      "click": _vm.reLaunch
+    }
+  }, [_vm._v("reLaunch to home")]), _vm._v(" "), _c('div', {
+    staticClass: "button",
+    attrs: {
+      "eventid": '9'
+    },
+    on: {
+      "click": _vm.setStorage
+    }
+  }, [_vm._v("setStorage")]), _vm._v(" "), _c('div', {
+    staticClass: "button",
+    attrs: {
+      "eventid": '10'
+    },
+    on: {
+      "click": _vm.getStorage
+    }
+  }, [_vm._v("getStorage")]), _vm._v(" "), _c('div', {
+    staticClass: "button",
+    attrs: {
+      "eventid": '11'
+    },
+    on: {
+      "click": _vm.removeStorage
+    }
+  }, [_vm._v("removeStorage")]), _vm._v(" "), _c('ui', {
     attrs: {
       "mpcomid": '0'
     }
@@ -235,5 +309,5 @@ if (false) {
 
 /***/ })
 
-},[40]);
+},[85]);
 //# sourceMappingURL=main.js.map

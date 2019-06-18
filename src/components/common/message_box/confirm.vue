@@ -46,10 +46,6 @@ export default {
       type: String,
       default: () => '取消',
     },
-    index: {
-      type: Number,
-      default: () => 0,
-    },
   },
   components: {
     MsMask,
@@ -70,7 +66,7 @@ export default {
     callback(flag) {
       this.opacity = 0;
       setTimeout(() => {
-        this.$emit('callback', flag, this.index);
+        this.$emit('callback', flag);
       }, 200);
     },
   },

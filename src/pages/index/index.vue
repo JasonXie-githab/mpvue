@@ -2,7 +2,7 @@
  * @Author: Jason 
  * @Date: 2019-06-16 19:58:30 
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-17 20:39:05
+ * @Last Modified time: 2019-06-18 19:17:22
  */
 <template>
   <div class="container">
@@ -11,13 +11,19 @@
     <div class="button" @click="showLoading">showLoading</div>
     <div class="button" @click="hideLoading">hideLoading</div>
     <div class="button" @click="openMask">openMask</div>
-    <div class="button" @click="showSuccess">showSuccess</div>
+    <div class="button" @click="success">success</div>
+    <div class="button" @click="toHome">go to home</div>
+    <div class="button" @click="redirect">redirect to home</div>
+    <div class="button" @click="reLaunch">reLaunch to home</div>
+    <div class="button" @click="setStorage">setStorage</div>
+    <div class="button" @click="getStorage">getStorage</div>
+    <div class="button" @click="removeStorage">removeStorage</div>
+    
     <ui/>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -28,7 +34,7 @@ export default {
     confirm() {
       this.$confirm({
         title: '提示',
-        content: this.test,
+        content: '123',
         success: () => {
           this.$message('success');
         },
@@ -41,6 +47,8 @@ export default {
       this.$prompt({
         title: '请输入手机号',
         content: '123',
+        inputPattern: /^[1][3,4,5,7,8][0-9]{9}$/,
+        inputErrorMessage: '手机号不正确',
         success: (res) => {
           this.$message(res.value);
         },
@@ -63,8 +71,26 @@ export default {
         },
       });
     },
-    showSuccess() {
-      this.$showSuccess();
+    success() {
+      this.$success();
+    },
+    toHome() {
+      this.$go('home', { id: 1 });
+    },
+    redirect() {
+      this.$redirect('home');
+    },
+    reLaunch() {
+      this.$reLaunch('home');
+    },
+    setStorage() {
+      this.$setStorage('test', 'testStorage');
+    },
+    getStorage() {
+      this.$message(this.$getStorage('test'));
+    },
+    removeStorage() {
+      this.$removeStorage('test');
     },
   },
 };

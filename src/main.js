@@ -2,12 +2,13 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-17 20:33:20
+ * @Last Modified time: 2019-06-18 20:55:22
  */
 import Vue from 'vue';
 import App from '@/App';
 import store from './store';
 import Ui from './components/common/ui';
+import MsPage from './components/common/page';
 import './api/common_api';
 
 App.mpType = 'app';
@@ -16,13 +17,33 @@ const app = new Vue(App);
 app.$mount();
 
 Vue.component('Ui', Ui);
+Vue.component('MsPage', MsPage);
 
 Vue.mixin({
   data() {
     return {};
   },
+  computed: {
+    // 页面参数
+    $query() {
+      return this.$root.$mp.query;
+    },
+  },
   methods: {
-    navigateTo(url) {
+    // 重置query
+    $resetQuery(data) {
+      let queryStr = '?';
+      const arr = Object.keys(data);
+      if (arr.length <= 0) {
+        return '';
+      }
+      for (let i = 0; i < arr.length; i += 1) {
+        queryStr += `${arr[i]}=${data[arr[i]]}&`;
+      }
+      return queryStr;
+    },
+    // 跳转页面
+    $go(name, query = {}) {
       /* eslint-disable */
       const pages = getCurrentPages();
       /* eslint-enable */
@@ -33,36 +54,68 @@ Vue.mixin({
           success: (res) => {
             if (res.confirmed) {
               wx.redirectTo({
-                url: `pages/${url}/main`,
+                url: `/pages/${name}/main${this.$resetQuery(query)}`,
               });
             }
           },
         });
       } else {
         wx.navigateTo({
-          url: `pages/${url}/main`,
+          url: `/pages/${name}/main${this.$resetQuery(query)}`,
         });
       }
     },
-    navigateBack(delta) {
+    // 回退页面
+    $back(delta) {
       wx.navigateBack({
         delta: delta || 1,
       });
     },
-    redirectTo(url) {
+    // 重定向页面
+    $redirect(name, query) {
       wx.redirectTo({
-        url: `/pages/${url}/main`,
+        url: `/pages/${name}/main${this.$resetQuery(query)}`,
       });
     },
-    reLaunch(url) {
+    // 关闭所有页面，打开某个页面
+    $reLaunch(name, query) {
       wx.reLaunch({
-        url: `/pages/${url}/main`,
+        url: `/pages/${name}/main${this.$resetQuery(query)}`,
       });
     },
-    switchTab(url) {
+    // 跳转tab页面
+    $switchTab(name, query) {
       wx.switchTab({
-        url: `/pages/${url}/main`,
+        url: `/pages/${name}/main${this.$resetQuery(query)}`,
       });
+    },
+    // 滚动到顶部
+    $scrollToTop() {
+      wx.pageScrollTo({
+        scrollTop: 0,
+      });
+    },
+    // 本地存储
+    $setStorage(key, value) {
+      if (typeof key !== 'string' || typeof value !== 'string') {
+        return this.message('数据类型错误');
+      }
+      return wx.setStorageSync(key, value);
+    },
+    // 读取本地
+    $getStorage(key) {
+      if (typeof key !== 'string') {
+        this.$message('数据类型错误');
+        return false;
+      }
+      return wx.getStorageSync(key) || false;
+    },
+    // 删除本地
+    $removeStorage(key) {
+      if (typeof key !== 'string') {
+        return this.$message('数据类型错误');
+      }
+      return wx.removeStorageSync(key);
     },
   },
 });

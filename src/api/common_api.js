@@ -2,15 +2,16 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:57:54
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-16 20:21:36
+ * @Last Modified time: 2019-06-18 15:26:53
  */
 import Vue from 'vue';
+import store from '@/store';
 
-Vue.prototype.$App = new Vue();
 Vue.config.productionTip = false;
 // 打开蒙版
 Vue.prototype.$openMask = (data = { closeOnClickMask: false, beforeClose: false }) => {
-  Vue.prototype.$App.$emit('openMask', {
+  store.commit('setMask', {
+    show: true,
     // 是否点击蒙版关闭
     closeOnClickMask: data.closeOnClickMask,
     // 关闭前回调
@@ -20,43 +21,58 @@ Vue.prototype.$openMask = (data = { closeOnClickMask: false, beforeClose: false 
 
 // 关闭蒙版
 Vue.prototype.$closeMask = () => {
-  Vue.prototype.$App.$emit('closeMask');
+  store.commit('setMask', {
+    show: false,
+  });
 };
 
-Vue.prototype.$showLoading = (data = { title: '' }) => {
-  Vue.prototype.$App.$emit('showLoading', data);
+Vue.prototype.$showLoading = (data = {}) => {
+  store.commit('setLoading', { ...data, show: true });
 };
 
 Vue.prototype.$hideLoading = () => {
-  Vue.prototype.$App.$emit('hideLoading');
+  store.commit('setLoading', { show: false });
 };
 
-Vue.prototype.$showSuccess = (data = { message: '', duration: 2000 }) => {
-  const message = typeof data === 'string' ? data : data.message;
-  Vue.prototype.$App.$emit('showSuccess', {
+Vue.prototype.$success = (data = {}) => {
+  const text = typeof data === 'string' ? data : data.text;
+  store.commit('setSuccess', {
+    show: true,
     // 文本
-    message,
+    text,
     // 关闭延迟时间
-    duration: data.duration,
+    duration: data.duration || 2000,
   });
 };
+
+Vue.prototype.$closeSuccess = () => {
+  store.commit('setSuccess', {
+    show: false,
+  });
+};
+
 
 // 提示文字
 Vue.prototype.$message = (data = { message: '', duration: 2000 }) => {
-  const message = typeof data === 'string' ? data : data.message;
-  Vue.prototype.$App.$emit('message', {
+  const text = typeof data === 'string' ? data : data.text;
+  store.commit('addMessage', {
     // 文本
-    message,
+    text,
     // 关闭延迟时间
-    duration: data.duration,
+    duration: data.duration || 2000,
   });
+};
+
+Vue.prototype.$closeMessage = (message) => {
+  store.commit('delMessage', message);
 };
 
 // 确认框
 Vue.prototype.$confirm = ({
   title = '', content = '', showCancelButton = true, confirmButtonText = '确定', cancelButtonText = '取消', success, fail,
 }) => {
-  Vue.prototype.$App.$emit('confirm', {
+  store.commit('setConfirm', {
+    show: true,
     // 标题
     title: String(title),
     // 内容
@@ -73,17 +89,18 @@ Vue.prototype.$confirm = ({
     fail: fail || false,
   });
 };
-
-// 关闭确认框
 Vue.prototype.$closeConfirm = () => {
-  Vue.prototype.$App.$emit('closeConfirm');
+  store.commit('setConfirm', {
+    show: false,
+  });
 };
 
 // 输入确认框
 Vue.prototype.$prompt = ({
   title = '', content = '', showCancelButton = true, confirmButtonText = '确定', cancelButtonText = '取消', inputPattern, inputErrorMessage, success, fail,
 }) => {
-  Vue.prototype.$App.$emit('prompt', {
+  store.commit('setPrompt', {
+    show: true,
     // 标题
     title: String(title),
     // input value
@@ -107,5 +124,7 @@ Vue.prototype.$prompt = ({
 
 // 关闭输入确认框
 Vue.prototype.$closePrompt = () => {
-  Vue.prototype.$App.$emit('closePrompt');
+  store.commit('setPrompt', {
+    show: false,
+  });
 };

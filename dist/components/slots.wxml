@@ -6,3 +6,12 @@
 <import src="loading$0b1eace0" />
 <import src="success$86ab6652" />
 <import src="mask$95a9df68" />
+<import src="page$50003b22" />
+<template name="data-v-5cd4e19c-default-0">
+  <view class="_div data-v-5cd4e19c container">
+    <view class="_div data-v-5cd4e19c button" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">back index</view>
+    <view class="_div data-v-5cd4e19c box"></view>
+    <view class="_div data-v-5cd4e19c button" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">scrollToTop</view>
+  </view>
+</template>
+<template name="data-v-5cd4e19c-header-0">header</template>
