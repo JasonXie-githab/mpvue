@@ -2,25 +2,25 @@
  * @Author: Jason 
  * @Date: 2019-06-16 19:58:30 
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-18 19:17:22
+ * @Last Modified time: 2019-06-22 11:58:11
  */
 <template>
-  <div class="container">
-    <div class="button" @click="confirm">confirm</div>
-    <div class="button" @click="prompt">prompt</div>
-    <div class="button" @click="showLoading">showLoading</div>
-    <div class="button" @click="hideLoading">hideLoading</div>
-    <div class="button" @click="openMask">openMask</div>
-    <div class="button" @click="success">success</div>
-    <div class="button" @click="toHome">go to home</div>
-    <div class="button" @click="redirect">redirect to home</div>
-    <div class="button" @click="reLaunch">reLaunch to home</div>
-    <div class="button" @click="setStorage">setStorage</div>
-    <div class="button" @click="getStorage">getStorage</div>
-    <div class="button" @click="removeStorage">removeStorage</div>
-    
-    <ui/>
-  </div>
+  <ms-page @pullingDown="pullingDown" @pullingUp="pullingUp">
+    <div class="container">
+      <div class="button" @click="confirm">confirm</div>
+      <div class="button" @click="prompt">prompt</div>
+      <div class="button" @click="showLoading">showLoading</div>
+      <div class="button" @click="hideLoading">hideLoading</div>
+      <div class="button" @click="openMask">openMask</div>
+      <div class="button" @click="success">success</div>
+      <div class="button" @click="toHome">go to home</div>
+      <div class="button" @click="redirect">redirect to home</div>
+      <div class="button" @click="reLaunch">reLaunch to home</div>
+      <div class="button" @click="setStorage">setStorage</div>
+      <div class="button" @click="getStorage">getStorage</div>
+      <div class="button" @click="removeStorage">removeStorage</div>
+    </div>
+  </ms-page>
 </template>
 
 <script>
@@ -31,6 +31,12 @@ export default {
     };
   },
   methods: {
+    pullingDown() {
+      console.log('pullingDown');
+    },
+    pullingUp() {
+      console.log('pullingUp');
+    },
     confirm() {
       this.$confirm({
         title: '提示',

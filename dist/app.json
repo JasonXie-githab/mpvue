@@ -4,9 +4,10 @@
     "pages/home/main"
   ],
   "window": {
+    "backgroundColor": "#eee",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "mpvue demo",
+    "navigationBarTitleText": "mpvue",
     "navigationBarTextStyle": "black"
   }
 }

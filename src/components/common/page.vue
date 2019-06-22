@@ -1,39 +1,28 @@
 <template>
-  <div id="page" @touchmove="touchmove" :style="{top: pageOffsetTop + 'px'}">
-    <div id="container">
+  <div id="page" ref="wrapper">
+    <div id="content">
       <slot></slot>
     </div>
+    <ms-ui/>
   </div>
 </template>
 
 <script>
+import MsUi from './ui';
+
 export default {
   name: 'MsPage',
-  data() {
-    return {
-      pageOffsetTop: 0,
-      pageClientYStart: 0,
-    };
+  components: {
+    MsUi,
   },
-  methods: {
-    // touchstart(e) {
-    //   // this.pageClientYStart = e.clientY;
-    // },
-    touchmove(e) {
-      console.log(e);
-      const selQuery = wx.createSelectorQuery();
-      selQuery.select('#page').boundingClientRect((rect) => {
-        console.log(rect);
-        if (rect.top <= 0) {
-          if (this.pageClientYStart < 0) {
-            const num = this.pageClientYStart - e.clientY;
-            this.pageOffsetTop = num > 0 ? num : 0;
-          } else {
-            this.pageClientYStart = e.clientY;
-          }
-        }
-      }).exec();
-    },
+  config: {
+    enablePullDownRefresh: true,
+  },
+  onPullDownRefresh() {
+    this.$emit('pullingDown');
+  },
+  onReachBottom() {
+    this.$emit('pullingUp');
   },
 };
 </script>
@@ -41,10 +30,9 @@ export default {
 <style lang="scss" scoped>
 #page{
   min-height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  #content{
+
+  }
 }
 </style>
 

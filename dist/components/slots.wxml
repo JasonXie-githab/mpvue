@@ -1,4 +1,3 @@
-<import src="ui$703095f4" />
 <import src="mask$95a9df68" />
 <import src="message$578f2a4a" />
 <import src="confirm$1cca4d14" />
@@ -7,11 +6,28 @@
 <import src="success$86ab6652" />
 <import src="mask$95a9df68" />
 <import src="page$50003b22" />
-<template name="data-v-5cd4e19c-default-0">
+<import src="ui$703095f4" />
+<import src="slots" />
+<import src="ui$703095f4" /><template name="data-v-5cd4e19c-default-0">
   <view class="_div data-v-5cd4e19c container">
     <view class="_div data-v-5cd4e19c button" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">back index</view>
     <view class="_div data-v-5cd4e19c box"></view>
     <view class="_div data-v-5cd4e19c button" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">scrollToTop</view>
   </view>
 </template>
-<template name="data-v-5cd4e19c-header-0">header</template>
+<template name="data-v-6b277275-default-0">
+  <view class="_div data-v-6b277275 container">
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">confirm</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'1'}}" data-comkey="{{$k}}">prompt</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'2'}}" data-comkey="{{$k}}">showLoading</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'3'}}" data-comkey="{{$k}}">hideLoading</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'4'}}" data-comkey="{{$k}}">openMask</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'5'}}" data-comkey="{{$k}}">success</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'6'}}" data-comkey="{{$k}}">go to home</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'7'}}" data-comkey="{{$k}}">redirect to home</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'8'}}" data-comkey="{{$k}}">reLaunch to home</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'9'}}" data-comkey="{{$k}}">setStorage</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'10'}}" data-comkey="{{$k}}">getStorage</view>
+    <view class="_div data-v-6b277275 button" bindtap="handleProxy" data-eventid="{{'11'}}" data-comkey="{{$k}}">removeStorage</view>
+  </view>
+</template>

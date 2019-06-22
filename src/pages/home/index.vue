@@ -1,5 +1,5 @@
 <template>
-  <ms-page class="ms_page">
+  <ms-page enablePull>
     <div class="container">
       <div class="button" @click="back">back index</div>
       <div class="box"></div>
@@ -11,6 +11,9 @@
 <script>
 export default {
   name: 'Home',
+  config: {
+    enablePullDownRefresh: true,
+  },
   methods: {
     back() {
       this.$back();
@@ -23,10 +26,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ms_page{
-  // display: flex;
-  // flex-direction: column;
-}
 .container{
   padding: 30px;
 }

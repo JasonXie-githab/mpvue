@@ -65,6 +65,14 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
+        test: /\.vue$/,
+        loader: 'mpvue-config-loader',
+        exclude: [resolve('src/components')],
+        options: {
+          entry: './main.js'
+        }
+      },
+      {
         test: /\.js$/,
         include: [resolve('src'), resolve('test')],
         use: [

@@ -21,3 +21,8 @@ npm run build
 npm run buildH5
 
 ```
+
+# 版本指定
+mpvue：1.0.11
+mpvue-loader: 1.0.14
+mpvue-template-compiler: 1.0.11

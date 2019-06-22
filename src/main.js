@@ -2,21 +2,20 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-18 20:55:22
+ * @Last Modified time: 2019-06-22 11:01:37
  */
 import Vue from 'vue';
 import App from '@/App';
 import store from './store';
-import Ui from './components/common/ui';
 import MsPage from './components/common/page';
-import './api/common_api';
+import commonMethods from './api/common_api';
+
 
 App.mpType = 'app';
 Vue.prototype.$store = store;
 const app = new Vue(App);
 app.$mount();
 
-Vue.component('Ui', Ui);
 Vue.component('MsPage', MsPage);
 
 Vue.mixin({
@@ -30,6 +29,7 @@ Vue.mixin({
     },
   },
   methods: {
+    ...commonMethods,
     // 重置query
     $resetQuery(data) {
       let queryStr = '?';
@@ -127,9 +127,10 @@ export default {
     // 页面前带有 ^ 符号的，会被编译成首页，其他页面可以选填，我们会自动把 webpack entry 里面的入口页面加进去
     pages: ['^pages/index/main'],
     window: {
+      backgroundColor: '#eee',
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'mpvue demo',
+      navigationBarTitleText: 'mpvue',
       navigationBarTextStyle: 'black',
     },
   },

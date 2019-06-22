@@ -5,6 +5,15 @@
     <title>mpvue demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <meta http-equiv="cache-control" content="no-cache" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+       object-src 'self';
+       script-src 'self' 'unsafe-eval' 'unsafe-inline';
+       style-src 'self' 'unsafe-inline';
+       frame-src 'none';
+       worker-src 'none'"
+    />
   </head>
   <body>
     <div id="app"></div>
