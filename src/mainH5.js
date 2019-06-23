@@ -2,7 +2,7 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:59:26
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-22 11:01:59
+ * @Last Modified time: 2019-06-23 09:42:01
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -20,7 +20,9 @@ Vue.mixin({
     MsPage,
   },
   data() {
-    return {};
+    return {
+      scroll: null,
+    };
   },
   computed: {
     // 页面参数
@@ -86,6 +88,12 @@ Vue.mixin({
       }
       // eslint-disable-next-line no-undef
       return localStorage.removeItem(key);
+    },
+    // 结束下拉刷新
+    $finishPullDown() {
+      if (this.scroll !== null) {
+        this.scroll.finishPullDown();
+      }
     },
   },
 });

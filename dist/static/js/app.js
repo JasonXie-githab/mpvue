@@ -119,7 +119,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-22 11:01:37
+ * @Last Modified time: 2019-06-23 09:41:57
  */
 
 
@@ -245,6 +245,11 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.mixin({
         return this.$message('数据类型错误');
       }
       return wx.removeStorageSync(key);
+    },
+
+    // 结束下拉刷新
+    $finishPullDown: function $finishPullDown() {
+      return wx.stopPullDownRefresh();
     }
   })
 });

@@ -2,10 +2,10 @@
  * @Author: Jason 
  * @Date: 2019-06-16 19:58:30 
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-22 11:58:11
+ * @Last Modified time: 2019-06-23 10:15:04
  */
 <template>
-  <ms-page @pullingDown="pullingDown" @pullingUp="pullingUp">
+  <ms-page @pullingDown="pullingDown" @pullingUp="pullingUp" enablePull>
     <div class="container">
       <div class="button" @click="confirm">confirm</div>
       <div class="button" @click="prompt">prompt</div>
@@ -25,6 +25,9 @@
 
 <script>
 export default {
+  config: {
+    enablePullDownRefresh: true,
+  },
   data() {
     return {
       motto: 'Hello World',

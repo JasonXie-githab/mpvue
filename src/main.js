@@ -2,7 +2,7 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-22 11:01:37
+ * @Last Modified time: 2019-06-23 09:41:57
  */
 import Vue from 'vue';
 import App from '@/App';
@@ -116,6 +116,10 @@ Vue.mixin({
         return this.$message('数据类型错误');
       }
       return wx.removeStorageSync(key);
+    },
+    // 结束下拉刷新
+    $finishPullDown() {
+      return wx.stopPullDownRefresh();
     },
   },
 });
