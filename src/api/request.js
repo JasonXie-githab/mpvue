@@ -1,21 +1,13 @@
 /*
- * @Author: Kaiser
- * @Date: 2019-06-10 15:28:52
+ * @Author: Jason
+ * @Date: 2019-06-13 16:42:36
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-16 17:55:34
+ * @Last Modified time: 2019-06-14 18:36:18
  */
-import axios from '_modules/axios';
-import { getType } from '@/utils/tools.ts';
+
 import apiModules from './api_module';
 // 默认request的配置
-const DEFAULT_OPTION = {
-  headers: {
-    'Content-Type': 'application/json;charset=utf-8',
-  },
-  timeout: 30000,
-  baseURL: process.env.API_DOMAIN,
-};
-
+const baseURL = process.env.API_DOMAIN;
 /**
  * 根据网络状态码返回错误信息
  * @param {Number or String} status 网络状态码
@@ -53,102 +45,64 @@ export default class Request {
         throw new Error("the request's module is set incorrectly");
       }
     }
-    const $option = { ...DEFAULT_OPTION, ...option };
-    delete $option.module;
-    this.$http = axios.create($option);
-
-    // request拦截器
-    this.$http.interceptors.request.use(
-      (config) => {
-        $vue.$store.dispatch('ui/setNProgress', 'start');
-        return config;
-      },
-      error => Promise.reject(error),
-    );
-
-    // response拦截器
-    this.$http.interceptors.response.use(
-      (response) => {
-        $vue.$store.dispatch('ui/setNProgress', 'done');
-        return response.data || response;
-      },
-      (error) => {
-        const message = getResponseErrorTip(
-          error.response && error.response.status,
-        );
-        $vue.$store.dispatch('ui/showErrorMessage', message);
-        return Promise.reject(error);
-      },
-    );
   }
 
-  /**
-   * 将请求参数封装到headers的DATA中，必要可在这里加密
-   * @param {String} url 实际请求的url
-   * @param {Object} data 请求参数
-   */
-  setDATA(url, data = {}) {
-    let str = '';
-    if (getType(data) === 'Object') {
-      Object.entries(data).forEach((query) => {
-        str += `${query[0]}=${query[1]}`;
+  getDATA() {
+    return JSON.stringify({
+      _url_: url,
+      random: '880000001',
+    });
+  }
+
+  $http(method, url, data) {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: baseURL + this.moduleUrl,
+        method,
+        data,
+        header: {
+          'content-type': 'application/json;charset=utf-8',
+          DATA: this.getDATA(),
+        },
+        success: (res) => {
+          resolve(res.data);
+        },
+        fail: (err) => {
+          reject(err);
+        },
       });
-    }
-    this.$http.defaults.headers.DATA = JSON.stringify({
-      _url_: url + (str && `?${str}`),
-      // todo 这是干啥的？
-      _random_: '880000003',
     });
   }
 
   get(url, data) {
-    return new Promise((resolve) => {
-      this.setDATA(url, data);
-      resolve(
-        this.$http({
-          method: 'get',
-          url: this.moduleUrl,
-        }),
-      );
+    return this.$http({
+      method: 'GET',
+      url,
+      data,
     });
   }
 
   post(url, data) {
-    return new Promise((resolve) => {
-      this.setDATA(url);
-      resolve(
-        this.$http({
-          method: 'post',
-          url: this.moduleUrl,
-          data,
-        }),
-      );
+    return this.$http({
+      method: 'POST',
+      url,
+      data,
     });
   }
 
   delete(url, data) {
-    return new Promise((resolve) => {
-      this.setDATA(url);
-      resolve(
-        this.$http({
-          method: 'delete',
-          url: this.moduleUrl,
-          data,
-        }),
-      );
+    return this.$http({
+      method: 'DELETE',
+      url,
+      data,
     });
   }
 
   put(url, data) {
-    return new Promise((resolve) => {
-      this.setDATA(url);
-      resolve(
-        this.$http({
-          method: 'put',
-          url: this.moduleUrl,
-          data,
-        }),
-      );
+    return this.$http({
+      method: 'PUT',
+      url,
+      data,
     });
   }
 }

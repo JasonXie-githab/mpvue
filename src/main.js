@@ -2,7 +2,7 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:59:22
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-23 09:41:57
+ * @Last Modified time: 2019-06-24 09:54:55
  */
 import Vue from 'vue';
 import App from '@/App';
@@ -90,9 +90,9 @@ Vue.mixin({
       });
     },
     // 滚动到顶部
-    $scrollToTop() {
+    $scrollTo(num) {
       wx.pageScrollTo({
-        scrollTop: 0,
+        scrollTop: num || 0,
       });
     },
     // 本地存储

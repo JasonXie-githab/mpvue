@@ -2,7 +2,7 @@
  * @Author: Jason
  * @Date: 2019-06-16 19:59:26
  * @Last Modified by: Jason
- * @Last Modified time: 2019-06-23 09:42:01
+ * @Last Modified time: 2019-06-24 09:55:11
  */
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
@@ -60,9 +60,9 @@ Vue.mixin({
       });
     },
     // 滚动到顶部
-    $scrollToTop() {
+    $scrollTo(num) {
       // eslint-disable-next-line no-undef
-      window.scroll(0, 0);
+      window.scroll(0, num || 0);
     },
     // 本地存储
     $setStorage(key, value) {
