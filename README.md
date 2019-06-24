@@ -20,8 +20,6 @@ npm run build
 # H5打包（打包到distH5目录)
 npm run buildH5
 
-```
-
 # 版本指定
 mpvue：1.0.11
 mpvue-loader: 1.0.14
